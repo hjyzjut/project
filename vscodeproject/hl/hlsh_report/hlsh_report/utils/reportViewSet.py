@@ -7,9 +7,8 @@ from .response import BaseResponse
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from hlsh_report.apps.logs.models import OperateLog
-from hlsh_report.apps.logs.serializers import OperateLogSerializer
-import datetime
 from hlsh_report.utils.reportJson import json_load
+import datetime
 
 class ReportViewSet(ModelViewSet):
     queryset = None
@@ -23,18 +22,16 @@ class ReportViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         json_data = request.data
         data = json_load(request)
-        # print(type(json_data['user']))
+        # print(json_data['data'])
         if isinstance(data, list):
-            
             serializer = self.get_serializer(data=data, many=True)
         else:
             serializer = self.get_serializer(data=data)
         # is_valid()方法还可以在验证失败时抛出异常serializers.ValidationError，可以通过传递raise_exception=True参数开启，REST framework接收到此异常，会向前端返回HTTP 400 Bad Request响应
         serializer.is_valid(raise_exception=True)
-        print("isinstance:serializer")
         operate_log = OperateLog.objects.create(user=json_data['user'], operate_type='创建',data_model=json_data['template'],file_name=json_data['file_name'],operate_time=datetime.datetime.now())
         self.perform_create(serializer)
-        header = self.get_success_headers(serializer.data) 
+        header = self.get_success_headers(serializer.data)
         return BaseResponse(data=serializer.data, code=201, success=True, msg="创建成功", status=status.HTTP_201_CREATED,headers=header)
 
 

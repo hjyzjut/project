@@ -11,8 +11,8 @@ class UserSerializer(serializers.ModelSerializer):
         "input_type": "password"})
     password2 = serializers.CharField(
         style={"input_type": "password"}, write_only=True, label="Confirm password")
-    newpassword = serializers.CharField(
-        style={"input_type": "password"}, write_only=True, label="update password")
+#    newpassword = serializers.CharField(
+#        style={"input_type": "password"}, write_only=True, label="update password")
 
     class Meta:
         model = User

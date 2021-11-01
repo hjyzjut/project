@@ -94,6 +94,7 @@ WSGI_APPLICATION = 'hlsh_report.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
 DATABASE_ROUTERS = [
     'hlsh_report.apps.report.reportRouter.Router',
     'hlsh_report.apps.logs.logsRouter.Router',
@@ -109,6 +110,8 @@ DATABASES = {
         'PASSWORD': 'Lc3&xaOE',  # 连接数据库的密码
         'HOST': '121.37.136.201',  # 连接数据库的地址
         'PORT': '3338',  # 连接数据库的端口
+        # 'HOST': '192.168.0.7', 
+        # 'PORT': '3306'
     },
     'fill_apps':{
         'ENGINE': 'django.db.backends.mysql',  # 使用的引擎，需要安装 PyMySQL 包
@@ -117,6 +120,8 @@ DATABASES = {
         'PASSWORD': 'Lc3&xaOE',  # 连接数据库的密码
         'HOST': '121.37.136.201',  # 连接数据库的地址
         'PORT': '3338',  # 连接数据库的端口
+        # 'HOST': '192.168.0.7',
+        # 'PORT': '3306'
     },
 }
 
@@ -165,7 +170,7 @@ STATIC_URL = '/static/'
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=8),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=12),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,  # TokenRefreshView之后会返回一个新的access和refresh
     'BLACKLIST_AFTER_ROTATION': False,  # 令牌黑名单

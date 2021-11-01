@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import fields
 from rest_framework import serializers
-from .models import GmvBudget, GmvGsvReal, GmvWeekReal, GuaranteedLicenseIncome, RealLicenseIncome
+from .models import *
 
 class GmvBudgetSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,4 +29,15 @@ class GuaranteedLicenseIncomeSerializer(serializers.ModelSerializer):
 class RealLicenseIncomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = RealLicenseIncome
+        fields = '__all__'
+
+class AuthorizedShopSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AuthorizedShop
+        fields = '__all__'
+
+
+class DoubleElevenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DoubleEleven
         fields = '__all__'

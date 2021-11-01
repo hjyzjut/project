@@ -106,8 +106,6 @@ class CustomTokenObtainPairView(TokenViewBase):
             serializer.is_valid(raise_exception=True)
         except TokenError as e:
             raise InvalidToken(e.args[0])
-            # return BaseResponse(data=serializer.validated_data, status=status.HTTP_401_UNAUTHORIZED, code=401, msg="用户名或密码错误",
-            #                   success=True, )
 
         return BaseResponse(data=serializer.validated_data, status=status.HTTP_200_OK, code=200, msg="success",
                               success=True, )

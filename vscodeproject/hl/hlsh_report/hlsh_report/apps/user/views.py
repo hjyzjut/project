@@ -9,6 +9,7 @@ from hlsh_report.utils.response import BaseResponse
 from .serializers import UserSerializer
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication,TokenAuthentication
 from rest_framework_simplejwt.authentication import *
 # Create your views here.
 
@@ -31,6 +32,10 @@ class UserViewSet(BaseViewSet):
                                     'retrieve': [AllowAny],
                                     'destroy': [AllowAny]
                                     }
+
+    
+    # authentication_classes = ([])
+
     
     # 根据action获取权限
     def get_permissions(self):
@@ -43,10 +48,15 @@ class UserViewSet(BaseViewSet):
 
     # 重写 get_authenticators函数
     def get_authenticators(self):
-
+        # print('username{}'.format(self.request.user))
+        # print(self.authentication_classes)
+        """
+        Instantiates and returns the list of authenticators that this view can use.
+        """
         if self.request.method in ('POST'):
             self.authentication_classes = ([])
         
+
         return [auth() for auth in self.authentication_classes]
 
 
@@ -57,12 +67,7 @@ class UserViewSet(BaseViewSet):
         user = self.perform_create(serializer)
 
         # 添加自己的逻辑，生成token并返回
-        try:
-            refresh = RefreshToken.for_user(user)
-        except TokenError as e: 
-            return BaseResponse(data=serializer.validated_data, status=status.HTTP_401_UNAUTHORIZED, code=401, msg="用户名或密码错误",
-                              success=False )
-        
+        refresh = RefreshToken.for_user(user)
         tokens_for_user = {
             'refresh': str(refresh),
             'access': str(refresh.access_token),

@@ -8,9 +8,9 @@ from rest_framework.decorators import api_view
 from django_filters.rest_framework import DjangoFilterBackend
 from .serializers import OperateLogSerializer
 from hlsh_report.utils.baseViewSet import BaseViewSet
-import datetime
+import datetime 
 from rest_framework.permissions import *
-
+import pendulum
 # Create your views here.
 
 class OperateLogViewSet(BaseViewSet):
@@ -33,13 +33,17 @@ class OperateLogViewSet(BaseViewSet):
         print(query_params)
         s = query_params.get('start_time', None)
         e =  query_params.get('end_time', None)
-        user = query_params.get('user',None)
+        user = query_params.get('user', None)
+        print(s,e)
+        print(user)
         start_time = datetime.datetime(year=int(s[0:4]), month=int(s[4:6]), day=int(s[6:8]))
         end_time = datetime.datetime(year=int(e[0:4]), month=int(e[4:6]), day=int(e[6:8]))+datetime.timedelta(days=1)
-        # print(type(start_time),end_time)
+        # end_time = pendulum.parse(e).subtract(days=1)
+        print(start_time,end_time)
         if user is not None:
-            return OperateLog.objects.filter(operate_time__range=(start_time, end_time),user=user)
+            return OperateLog.objects.filter(operate_time__range=(start_time, end_time), user=user)
         else:
+        
             return OperateLog.objects.filter(operate_time__range=(start_time, end_time))
 
     

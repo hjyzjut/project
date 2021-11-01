@@ -3,6 +3,7 @@
         "chardeque",
         "Deque",
         "optim",
-        "penup"
+        "penup",
+        "scipy"
     ]
 }
