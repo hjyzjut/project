@@ -246,6 +246,8 @@ class DoubleEleven(models.Model):
     brand = models.CharField(max_length=30, verbose_name='品牌', null=True, blank=True)
     sales = models.DecimalField(max_digits=32, decimal_places=8,  verbose_name='商品销量', null=True, blank=True)
     order_num = models.IntegerField(verbose_name='订单数量', null=True, blank=True)
+    unique_visitor = models.IntegerField(verbose_name='访客数', null=True, blank=True)
+    avg_transaction_val = models.DecimalField(max_digits=32, decimal_places=8,  verbose_name='客单价', null=True, blank=True)
     transaction_amount = models.DecimalField(max_digits=32, decimal_places=8,  verbose_name='成交金额', null=True, blank=True)
 
     

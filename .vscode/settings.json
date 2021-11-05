@@ -1,7 +1,9 @@
 {
     "cSpell.words": [
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        "alist",
         "infixexpr",
-        "prec"
+        "prec",
+        "vmax"
     ]
 }
