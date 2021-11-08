@@ -2,7 +2,11 @@
     "cSpell.words": [
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         "alist",
+        "arange",
+        "bmat",
+        "burandoeno",
         "infixexpr",
+        "itertuples",
         "prec",
         "vmax"
     ]
