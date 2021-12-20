@@ -203,7 +203,7 @@ class AuthorizedShop(models.Model):
     category = models.CharField(max_length=30, verbose_name='类目', null=True, blank=True)
     channel = models.CharField(max_length=50, verbose_name='渠道', null=True, blank=True)
     authorized_dealer = models.CharField(max_length=500, verbose_name='客户')
-    certificate_number = models.CharField(max_length=100, verbose_name='证书编号（红色为盖章中）', null=True, blank=True)
+    certificate_number = models.CharField(max_length=500, verbose_name='证书编号（红色为盖章中）', null=True, blank=True)
     first_party = models.CharField(max_length=500, verbose_name='授权方/甲方', null=True, blank=True)
     second_party = models.CharField(max_length=500, verbose_name='被授权方/乙方', null=True, blank=True)
     nature_of_the_licensee = models.CharField(max_length=100, verbose_name='被授权方性质', null=True, blank=True)
@@ -249,7 +249,7 @@ class DoubleEleven(models.Model):
     unique_visitor = models.IntegerField(verbose_name='访客数', null=True, blank=True)
     avg_transaction_val = models.DecimalField(max_digits=32, decimal_places=8,  verbose_name='客单价', null=True, blank=True)
     transaction_amount = models.DecimalField(max_digits=32, decimal_places=8,  verbose_name='成交金额', null=True, blank=True)
-
+    customer_num = models.IntegerField(verbose_name='买家数', null=True, blank=True)
     
     user = models.CharField(max_length=30, verbose_name='用户')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')  # auto_now_add创建时自动将创建的时间插入
@@ -258,5 +258,33 @@ class DoubleEleven(models.Model):
     class Meta:
         db_table = 'double_eleven'
         verbose_name = '双十一大屏'
+        verbose_name_plural = verbose_name
+        ordering = ['-id', '-create_time']
+        
+        
+class WeeklySalesReport(models.Model):
+      
+    id = models.AutoField(primary_key=True)
+
+    sale_year = models.IntegerField(verbose_name='年度')
+    sale_month = models.IntegerField(verbose_name='月份')
+    sale_week = models.CharField(max_length=10, verbose_name='周数')
+    sale_date = models.CharField(max_length=10, verbose_name='日期')
+    shop_name = models.CharField(max_length=255, verbose_name='店铺名称')
+    channel = models.CharField(max_length=20, verbose_name='渠道')
+    target_gsv_day = models.DecimalField(max_digits=32, decimal_places=8, verbose_name='GSV目标/天')
+    sales_amount = models.DecimalField(max_digits=32, decimal_places=8, verbose_name='销售金额')
+    refund_amount = models.DecimalField(max_digits=32, decimal_places=8, verbose_name='退款金额')
+    goods_tax_cost = models.DecimalField(max_digits=32, decimal_places=8, verbose_name='含税商品成本')
+    launch_budget = models.DecimalField(max_digits=32, decimal_places=8, verbose_name='投放预算')
+    launch_real = models.DecimalField(max_digits=32, decimal_places=8, verbose_name='实际投放')
+    
+    user = models.CharField(max_length=30, verbose_name='用户')
+    create_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')  # auto_now_add创建时自动将创建的时间插入
+    update_time = models.DateTimeField(auto_now=True, verbose_name='修改时间')  # auto_now更新时自动将时间插入
+
+    class Meta:
+        db_table = 'sale_report_week'
+        verbose_name = '销售周报'
         verbose_name_plural = verbose_name
         ordering = ['-id', '-create_time']

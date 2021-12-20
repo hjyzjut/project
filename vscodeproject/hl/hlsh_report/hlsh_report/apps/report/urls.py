@@ -11,6 +11,7 @@ router.register(r'^guaranteed_license_income', GuaranteedLicenseIncomeViewSet)
 router.register(r'^real_license_income', RealLicenseIncomeViewSet)
 router.register(r'^authorized_shop', AuthorizedShopViewSet)
 router.register(r'^double_eleven', DoubleElevenViewSet)
+router.register(r'^sale_report_week', WeeklySalesReportViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -170,3 +170,19 @@ class DoubleElevenViewSet(ReportViewSet):
 
     # 只允许POST,GET请求
     http_method_names = ['get','post']
+    
+
+class WeeklySalesReportViewSet(ReportViewSet):
+    
+    permission_classes = [IsAuthenticated]
+
+    queryset = WeeklySalesReport.objects.all()
+    serializer_class = WeeklySalesReportSerializer
+
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    search_fields = ['id']
+    filterset_fields = ['id']
+    ordering_fields = ['update_time', 'create_time']
+
+    # 只允许POST,GET请求
+    http_method_names = ['get','post']

@@ -41,3 +41,9 @@ class DoubleElevenSerializer(serializers.ModelSerializer):
     class Meta:
         model = DoubleEleven
         fields = '__all__'
+        
+        
+class WeeklySalesReportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WeeklySalesReport
+        fields = '__all__'
